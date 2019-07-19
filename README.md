@@ -14,15 +14,15 @@ This container contains a few debugging tools that can be needed when debugging 
 docker run --rm -ti --net container:<container-id> quay.io/amoran/3scale-debug
 ```
 
-## Openshift (in your 3scale project) - Recommended as it doesn't involve changing deployments
+## Openshift (via oc run) **Recommended** as it doesn't involve changing deployments
 
 ```
 oc run 3scale-debug -i --tty --rm --image=quay.io/amoran/3scale-debug:latest
 ```
 
-## Sidecar
+## Sidecar
 
-### Patch Add
+### Patch Add
 
 ```
 oc patch dc/<deployment config name> --type='json' -p='[{"op": "add", "path": "/spec/template/spec/containers/0", "value": {"command": ["/bin/sleep","infinity"],"image": "quay.io/amoran/3scale-debug","name": "3scale-debug"} }]'
